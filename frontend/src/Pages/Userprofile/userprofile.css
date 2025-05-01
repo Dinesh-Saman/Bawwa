@@ -1,0 +1,284 @@
+/* userprofile.css */
+:root {
+  --primary: #ff7a00;
+  --primary-light: #ff9a42;
+  --secondary: #4a6fa5;
+  --dark: #2d3748;
+  --light: #f8f9fa;
+  --gray: #718096;
+  --light-gray: #e2e8f0;
+  --error: #e53e3e;
+}
+
+/* Base Styles */
+.profile-page {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background-color: #f9f5f0;
+  background-image: url('../../assets/paw-pattern.png');
+  background-size: 300px;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Loading State */
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--light-gray);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 100px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.no-profile {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--gray);
+  margin-top: 100px;
+}
+
+/* Profile Container */
+.profile-container {
+  width: 100%;
+  max-width: 1000px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 80px;
+}
+
+.profile-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+}
+
+/* Header Section */
+.profile-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.profile-header h1 {
+  font-size: 2.2rem;
+  color: var(--dark);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.profile-header p {
+  color: var(--gray);
+  font-size: 1rem;
+}
+
+/* Profile Content */
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.pet-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .pet-profile {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+/* Pet Image */
+.pet-image-container {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.pet-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 3px solid var(--primary-light);
+}
+
+.pet-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Info Sections */
+.pet-info, .owner-info {
+  flex: 1;
+}
+
+.pet-info h2, .owner-info h2 {
+  font-size: 1.5rem;
+  color: var(--dark);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.info-item {
+  background: var(--light);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.info-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.info-value {
+  font-size: 1rem;
+  color: var(--dark);
+  font-weight: 600;
+}
+
+/* Form Elements */
+input, select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--light-gray);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(255, 122, 0, 0.1);
+}
+
+/* Action Buttons */
+.profile-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+}
+
+.appointments-btn {
+  background: var(--secondary);
+  color: white;
+}
+
+.appointments-btn:hover {
+  background: #3a5a8a;
+}
+
+.edit-btn {
+  background: var(--primary);
+  color: white;
+}
+
+.edit-btn:hover {
+  background: var(--primary-light);
+}
+
+.delete-btn-user {
+  background: var(--error);
+  color: white;
+}
+
+.delete-btn-user:hover {
+  background: #c53030;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 20px 10px;
+  }
+  
+  .profile-container {
+    padding: 20px;
+  }
+  
+  .profile-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .pet-image-container {
+    max-width: 250px;
+  }
+  
+  .pet-image {
+    height: 250px;
+  }
+}
+
+@media (max-width: 576px) {
+  .profile-actions {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

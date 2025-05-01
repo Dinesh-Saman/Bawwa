@@ -1,0 +1,228 @@
+/* Base styles */
+.payment-page-container {
+  min-height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  font-family: 'Poppins', 'Arial', sans-serif;
+}
+
+.payment-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 100px;
+}
+
+.payment-container h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.payment-container p {
+  font-size: 18px;
+  color: #7f8c8d;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* Form styles */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #dfe6e9;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #6b48ff;
+  box-shadow: 0 0 8px rgba(107, 72, 255, 0.3);
+  outline: none;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+/* Button styles */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
+  background: linear-gradient(90deg, #6b48ff, #00ddeb);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(90deg, #00ddeb, #6b48ff);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.payment-cancel-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  background: transparent;
+  color: #6b48ff;
+  border: 2px solid #6b48ff;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.payment-cancel-btn:hover {
+  background: #6b48ff;
+  color: white;
+}
+
+/* Spinner animation */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Error messages */
+.error-message {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* SweetAlert customizations */
+.swal2-popup {
+  font-family: 'Poppins', sans-serif;
+  border-radius: 16px !important;
+}
+
+.swal2-title {
+  font-size: 24px !important;
+  color: #2c3e50 !important;
+}
+
+.swal2-confirm {
+  background-color: #F97316 !important;
+  border: none !important;
+  padding: 10px 24px !important;
+}
+
+.swal2-confirm:hover {
+  background-color: #e66400 !important;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+}
+
+.modal-content h3 {
+  color: #27ae60;
+  margin-bottom: 15px;
+}
+
+.modal-content p {
+  margin-bottom: 25px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.modal-button {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-button.primary {
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+  color: white;
+  border: none;
+}
+
+.modal-button.secondary {
+  background: white;
+  color: #2c3e50;
+  border: 2px solid #dfe6e9;
+}
+
+.modal-button.primary:hover {
+  background: linear-gradient(90deg, #2ecc71, #27ae60);
+}
+
+.modal-button.secondary:hover {
+  background: #f5f6fa;
+}

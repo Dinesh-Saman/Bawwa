@@ -1,0 +1,472 @@
+/* frontend/NutritionManagement.css */
+:root {
+  --primary-color: #db8534;
+  --primary-dark: #db8534;
+  --secondary-color: #e74c3c;
+  --secondary-dark: #c0392b;
+  --success-color: #2ecc71;
+  --success-dark: #27ae60;
+  --warning-color: #f39c12;
+  --light-gray: #f4f6f9;
+  --medium-gray: #e0e0e0;
+  --dark-gray: #777;
+  --text-color: #333;
+  --border-radius: 6px;
+  --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.nutrition-management {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 15px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  flex: 1; /* Ensures content takes remaining space */
+  margin-top: 50px;
+}
+
+@media (min-width: 992px) {
+  .container {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+/* Form Styling */
+.nutrition-form-section {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 25px;
+  box-shadow: var(--box-shadow);
+}
+
+.nutrition-form-section h2 {
+  margin-bottom: 20px;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
+
+.nutrition-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--dark-gray);
+}
+
+input,
+select {
+  padding: 12px;
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 1rem;
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+  background-color: var(--medium-gray);
+  color: var(--text-color);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #d1d1d1;
+}
+
+.btn-edit {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-delete {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: var(--secondary-dark);
+}
+
+.btn-refresh {
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1.2rem;
+  padding: 8px 16px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-refresh:hover {
+  background-color: var(--primary-dark);
+  transform: rotate(180deg);
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Alert Messages */
+.alert-container {
+  margin: 0 auto 20px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 15px;
+}
+
+.alert {
+  padding: 12px 15px;
+  border-radius: var(--border-radius);
+  margin-bottom: 20px;
+  animation: fadeIn 0.5s;
+}
+
+.alert-success {
+  background-color: rgba(46, 204, 113, 0.2);
+  border-left: 4px solid var(--success-color);
+  color: var(--success-dark);
+}
+
+.alert-error {
+  background-color: rgba(231, 76, 60, 0.2);
+  border-left: 4px solid var(--secondary-color);
+  color: var(--secondary-dark);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Nutrition Records List */
+.nutrition-list-section {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 25px;
+  box-shadow: var(--box-shadow);
+}
+
+.nutrition-list-section h2 {
+  margin-bottom: 20px;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
+
+.filter-container {
+  display: flex;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 10px 15px;
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.8fr 1fr 0.8fr 1fr;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  overflow: hidden;
+}
+
+.table-header-cell {
+  padding: 12px 15px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.table-header-cell:hover {
+  background-color: var(--primary-dark);
+}
+
+.nutrition-grid {
+  border: 1px solid var(--medium-gray);
+  border-top: none;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  overflow: hidden;
+}
+
+.nutrition-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.8fr 1fr 0.8fr 1fr;
+  border-bottom: 1px solid var(--medium-gray);
+  transition: var(--transition);
+}
+
+.nutrition-item:last-child {
+  border-bottom: none;
+}
+
+.nutrition-item:hover {
+  background-color: rgba(52, 152, 219, 0.05);
+}
+
+.nutrition-data {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.nutrition-actions {
+  padding: 10px;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.nutrition-actions button {
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-daily {
+  background-color: rgba(46, 204, 113, 0.2);
+  color: var(--success-dark);
+}
+
+.badge-weekly {
+  background-color: rgba(52, 152, 219, 0.2);
+  color: var(--primary-dark);
+}
+
+.badge-monthly {
+  background-color: rgba(243, 156, 18, 0.2);
+  color: var(--warning-color);
+}
+
+.nutrition-frequency {
+  display: flex;
+  justify-content: center;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--dark-gray);
+}
+
+.empty-state p {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.empty-state-hint {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  display: inline-block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  z-index: 1000;
+}
+
+.loading-spinner div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid var(--primary-color);
+  border-radius: 50%;
+  animation: loading-spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: var(--primary-color) transparent transparent transparent;
+}
+
+.loading-spinner div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.loading-spinner div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.loading-spinner div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes loading-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .table-header,
+  .nutrition-item {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .table-header-cell:nth-child(4),
+  .table-header-cell:nth-child(5),
+  .nutrition-data:nth-child(4),
+  .nutrition-data:nth-child(5) {
+    display: none;
+  }
+
+  .nutrition-actions {
+    grid-column: span 3;
+    border-top: 1px solid var(--medium-gray);
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+}
+
+@media (max-width: 480px) {
+  .table-header,
+  .nutrition-item {
+    grid-template-columns: 1fr;
+  }
+
+  .table-header-cell:not(:first-child) {
+    display: none;
+  }
+
+  .nutrition-data {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--medium-gray);
+  }
+
+  .nutrition-data::before {
+    content: attr(data-label);
+    font-weight: 600;
+  }
+
+  .nutrition-actions {
+    grid-column: 1;
+    border-top: none;
+  }
+
+  .nutrition-item {
+    border: 1px solid var(--medium-gray);
+    margin-bottom: 15px;
+    border-radius: var(--border-radius);
+  }
+
+  .nutrition-grid {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}

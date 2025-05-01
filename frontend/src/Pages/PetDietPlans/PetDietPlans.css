@@ -1,0 +1,348 @@
+/* Base Styles */
+.pet-diet-plans {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #2d3748;
+  margin-top: 150px;
+}
+
+/* Header Section */
+.pet-diet-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+}
+
+.pet-diet-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #f97316, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.pet-diet-header p {
+  font-size: 1.1rem;
+  color: #4a5568;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Form Styles */
+.diet-form {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #f97316;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+.form-group input::placeholder {
+  color: #a0aec0;
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.submit-btn, .download-btn {
+  flex: 1;
+  padding: 0.85rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-btn {
+  background: linear-gradient(to right, #f97316, #ec4899);
+  color: white;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(to right, #f97316, #ec4899);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(249, 115, 22, 0.3);
+  /* Ensure no green color is applied */
+  filter: brightness(1.1); /* Optional: adds slight brightness on hover */
+}
+
+.submit-btn:disabled {
+  background: #cbd5e0;
+  transform: none;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.download-btn {
+  background: #2d3748;
+  color: white;
+}
+
+.download-btn:hover {
+  background: #1a202c;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(45, 55, 72, 0.2);
+}
+
+/* Spinner */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Dialog Styles */
+.diet-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.diet-dialog-content {
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2rem;
+  position: relative;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.4s ease-out;
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #718096;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #f97316;
+}
+
+.dialog-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.dialog-header h2 {
+  font-size: 1.75rem;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.pet-icon {
+  font-size: 3rem;
+  margin-top: 1rem;
+  display: inline-block;
+  animation: bounce 2s infinite;
+}
+
+/* Diet Details */
+.diet-details {
+  margin-top: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #4a5568;
+  min-width: 80px;
+}
+
+.detail-value {
+  color: #2d3748;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  color: #f97316;
+  margin: 2rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f97316;
+}
+
+.diet-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+}
+
+.diet-icon {
+  font-size: 1.5rem;
+  background: #fef3c7;
+  color: #f97316;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.diet-item h4 {
+  margin: 0 0 0.25rem 0;
+  color: #2d3748;
+}
+
+.diet-item p {
+  margin: 0;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.download-full-btn {
+  width: 100%;
+  padding: 0.85rem;
+  background: linear-gradient(to right, #f97316, #ec4899);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: all 0.3s ease;
+}
+
+.download-full-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(249, 115, 22, 0.3);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pet-diet-header h1 {
+    font-size: 2rem;
+  }
+  
+  .diet-form {
+    padding: 1.5rem;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .dialog-header h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pet-diet-header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .pet-diet-header p {
+    font-size: 1rem;
+  }
+  
+  .diet-form {
+    padding: 1.25rem;
+  }
+  
+  .diet-dialog-content {
+    padding: 1.5rem;
+  }
+  
+  .dialog-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .section-title {
+    font-size: 1.1rem;
+  }
+}

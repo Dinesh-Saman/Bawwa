@@ -1,0 +1,195 @@
+/* General Container Styles */
+.vaccination-container {
+  width: 100%;
+  max-width: 500px; /* Increased width for more space */
+  margin: 20px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.15); /* Light pastel background */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  border: 3px solid #ff9800; /* Soft orange border */
+  text-align: center;
+  position: relative;
+  margin-top: 130px;
+  height: auto;
+}
+
+/* Paw Print Decorations */
+.vaccination-container::before {
+  content: "🐾 🐾";
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  font-size: 20px;
+}
+
+.vaccination-container::after {
+  content: "🐾";
+  position: absolute;
+  bottom: -10px;
+  right: 20px;
+  font-size: 20px;
+}
+
+/* Title */
+.title {
+  font-size: 2rem;
+  color: #080402; /* Warm brown */
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 15px;
+}
+
+/* Input Group */
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #070707; /* Deep brown */
+  display: block;
+  margin-bottom: 5px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Input Fields */
+input, select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ff9800;
+  border-radius: 8px;
+  background-color: #fff8e1;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Button Styling */
+.calculate-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #ff7043;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.calculate-btn:hover {
+  background-color: #f4511e;
+  transform: scale(1.05);
+}
+
+/* Vaccination Schedule */
+.schedule-container {
+  margin-top: 40px; /* Increased margin to separate it from the form */
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  border: 2px solid #ff9800;
+  max-height: 400px; /* Set a max height for scrolling */
+  overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+/* Schedule Title */
+.schedule-container h3 {
+  font-size: 1.5rem;
+  color: #110805;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* List Items */
+.schedule-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.schedule-container li {
+  font-size: 16px;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+}
+
+/* Completed and Upcoming Vaccinations */
+.completed {
+  background-color: #c8e6c9; /* Soft green */
+  color: #2e7d32;
+  border: 2px solid #2e7d32;
+}
+
+.upcoming {
+  background-color: #ffccbc; /* Soft red */
+  color: #d84315;
+  border: 2px solid #d84315;
+}
+
+/* Status Colors */
+.text-gray {
+  color: #616161;
+}
+
+.text-green {
+  color: #2e7d32;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .vaccination-container {
+      width: 95%;
+  }
+
+  .title {
+      font-size: 1.8rem;
+  }
+
+  input, select {
+      font-size: 14px;
+  }
+
+  .calculate-btn {
+      font-size: 15px;
+  }
+
+  .schedule-container h3 {
+      font-size: 1.4rem;
+  }
+
+  .schedule-container li {
+      font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .vaccination-container {
+      width: 100%;
+      padding: 15px;
+  }
+
+  .title {
+      font-size: 1.6rem;
+  }
+
+  input, select {
+      font-size: 13px;
+  }
+
+  .calculate-btn {
+      font-size: 14px;
+  }
+
+  .schedule-container h3 {
+      font-size: 1.3rem;
+  }
+
+  .schedule-container li {
+      font-size: 13px;
+  }
+}

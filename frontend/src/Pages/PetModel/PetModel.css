@@ -1,0 +1,272 @@
+/* Global Styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Poppins', 'Arial', sans-serif;
+  background-size: cover; /* Make sure the background image covers the entire screen */
+  color: #1f2a44; /* Darker, professional text color */
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Header Styles */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 4rem;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  width: 100vw;
+  max-width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+header h1 {
+  color: #ff6f61; /* Brand color */
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+header h1:hover {
+  color: #ff4f41;
+}
+
+/* Main Pet Model Container */
+.pet-model-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 60px; /* Generous gap for professional spacing */
+  padding: 60px 30px;
+  max-width: 1500px; /* Wider for modern screens */
+  margin: 100px auto 60px; /* Space for header/footer */
+  flex-wrap: wrap;
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: calc(100vh - 220px); /* Adjust for header (80px) and footer (100px) */
+  box-sizing: border-box;
+}
+
+/* Pet Content (3D Model Section) */
+.pet-content {
+  flex: 1;
+  display: flex;
+  width: 45%;
+  min-width: 800px; /* Ensure it doesn't collapse */
+}
+
+/* Pet Canvas (3D Model Display) */
+.pet-canvas-container {
+  width: 100%;
+  height: 500px; /* Taller for prominence */
+  background: linear-gradient(45deg, #f99f67, #f38853); /* Refined gradient */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 12px 40px rgba(140, 183, 210, 0.3);
+  border-radius: 24px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pet-canvas-container:hover {
+  transform: scale(1.03);
+  box-shadow: 0 16px 50px rgba(166, 215, 233, 0.733);
+}
+
+/* Accessories Section */
+.pet-accessories-container {
+  width: 45%;
+  min-width: 450px;
+  background: #807e7de3;
+  padding: 40px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
+  max-height: calc(100vh - 220px);
+  min-height: 350px;
+  overflow-y: auto; /* Enable scrolling */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Hide Scrollbar */
+.pet-accessories-container::-webkit-scrollbar {
+  width: 0; /* Hide scrollbar for WebKit browsers */
+  background: transparent;
+}
+
+.pet-accessories-container::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.pet-accessories-container {
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+.pet-accessories-container:hover {
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Accessory List Cards */
+.accessory-card {
+  width: 100%;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  background: #f3f1ef;
+  margin-bottom: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.accessory-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.accessory-card img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  max-height: 150px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.accessory-card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #1f2a44;
+}
+
+.accessory-card p {
+  font-size: 0.95rem;
+  color: #fcca89;
+  line-height: 1.6;
+}
+
+/* Accessory Buttons */
+.accessory-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.accessory-buttons button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.select-button {
+  background: linear-gradient(90deg, #34d399, #059669); /* Professional green */
+  color: white;
+}
+
+.select-button:hover {
+  background: linear-gradient(90deg, #059669, #047857);
+  box-shadow: 0 5px 15px rgba(5, 150, 105, 0.3);
+}
+
+.add-to-cart-button {
+  background: linear-gradient(90deg, #fb923c, #f97316); /* Warm orange */
+  color: white;
+}
+
+.add-to-cart-button:hover {
+  background: linear-gradient(90deg, #f97316, #ea580c);
+  box-shadow: 0 5px 15px rgba(249, 115, 22, 0.3);
+}
+
+/* Pet Buttons Container */
+.pet-buttons-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2.5rem;
+  padding-bottom: 30px;
+}
+
+.pet-button {
+  width: 220px;
+  padding: 14px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: #e5e7eb;
+  color: #1f2a44;
+  transition: all 0.3s ease;
+}
+
+.pet-button:hover {
+  background: #d1d5db;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.pet-button.active {
+  background: linear-gradient(90deg, #ff7e70, #ff4f41); /* Matching pet canvas */
+  color: white;
+  box-shadow: 0 6px 20px rgba(255, 79, 65, 0.3);
+}
+
+/* Animation for accessory cards */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.accessory-card {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .pet-model-container {
+    gap: 40px;
+    padding: 40px 20px;
+  }
+
+  .pet-content,
+  .pet-accessories-container {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .pet-canvas-container {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 1rem 2rem;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+ 
+  .pet-canvas-container {
+    height: 350px;
+  }
+}

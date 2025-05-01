@@ -1,0 +1,146 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+}
+
+/* Home Container */
+.home-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 40px;;
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Overlay for better text visibility */
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+
+/* Hero Content Wrapper */
+.hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.9); /* 30% White semi-transparent background */
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid #000000cd; /* Orange border */
+}
+
+
+/* Hero Images Container */
+.hero-images {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Hero Pet Images */
+.hero-pet-image {
+    width: 80px; /* Adjust size as needed */
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Hero Title */
+.hero-section h2 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #F97316; /* Orange */
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+/* Hero Text */
+.hero-section p {
+    font-size: 1.3rem;
+    color: #333; /* Dark gray for contrast */
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+/* Book Now Button */
+.book-button {
+    background-color: #2d2d2d; /* 10% Green */
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 30%;
+}
+
+.book-button:hover {
+    background-color: #F97316; /* Darker green on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.book-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section h2 {
+        font-size: 2.5rem;
+    }
+
+    .hero-section p {
+        font-size: 1rem;
+    }
+
+    .book-button {
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
+
+    /* Adjust hero pet image sizes for smaller screens */
+    .hero-pet-image {
+        width: 60px;
+        height: 60px;
+    }
+
+    .hero-images {
+        gap: 0.5rem;
+    }
+}

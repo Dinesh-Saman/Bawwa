@@ -1,0 +1,219 @@
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Page Container */
+.booknow-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin-top: 80px;
+}
+
+/* Form Container */
+.booknow-container {
+  background: rgba(255, 255, 255, 0.95);
+  width: 90%;
+  max-width: 800px;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  margin: 40px 0;
+  border: 2px solid #ff9a42;
+}
+
+.booknow-title {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 25px;
+  text-align: center;
+  position: relative;
+}
+
+.booknow-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(to right, #ff7a00, #ff9a42);
+}
+
+/* Form Layout */
+.booknow-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.booknow-row {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.booknow-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Form Elements */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label {
+  font-weight: 600;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #ff7a00;
+  box-shadow: 0 0 0 2px rgba(255, 122, 0, 0.2);
+  background-color: #fff;
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 1em;
+}
+
+/* Button Styles */
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.booknow-button {
+  background: linear-gradient(to right, #ff7a00, #ff9a42);
+  color: white;
+  padding: 14px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.booknow-button:hover {
+  background: linear-gradient(to right, #e66400, #ff7a00);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 122, 0, 0.3);
+}
+
+.booknow-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Spinner Animation */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Error Messages */
+.error-text {
+  color: #e53e3e;
+  font-size: 0.85rem;
+  margin-top: -5px;
+  height: 20px;
+}
+
+/* Success Message */
+.success-message {
+  text-align: center;
+  padding: 30px;
+}
+
+.success-message h3 {
+  color: #38a169;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.success-message p {
+  color: #555;
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .booknow-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .booknow-container {
+    padding: 25px 20px;
+  }
+  
+  .booknow-title {
+    font-size: 1.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .booknow-page {
+    padding: 15px;
+  }
+  
+  .booknow-title {
+    font-size: 1.5rem;
+  }
+  
+  input, select {
+    padding: 10px 12px;
+  }
+  
+  .booknow-button {
+    padding: 12px 20px;
+    width: 100%;
+  }
+}
