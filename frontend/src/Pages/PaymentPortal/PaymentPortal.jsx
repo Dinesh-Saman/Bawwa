@@ -68,7 +68,7 @@ const PaymentPortal = () => {
       }));
     } else if (name === "cvv") {
       // Only allow numbers and limit to 3-4 digits
-      const cvvValue = value.replace(/[^0-9]/g, '').slice(0, 4);
+      const cvvValue = value.replace(/[^0-9]/g, '').slice(0, 3);
       setCardDetails(prev => ({
         ...prev,
         [name]: cvvValue
@@ -180,7 +180,7 @@ const PaymentPortal = () => {
           allowOutsideClick: false
         }).then((result) => {
           if (result.isConfirmed) {
-            navigate("/PetModel");
+            navigate("/shop/accessories");
           }
         });
       }
@@ -231,14 +231,19 @@ const PaymentPortal = () => {
           <div className="form-group">
             <label>Card Number:</label>
             <input
-                type="text"
-                name="cardNumber"
-                value={cardDetails.cardNumber}
-                onChange={handleInputChange}
-                placeholder="1234 5678 9012 3456"
-                required
-                maxLength={19}
-              />
+              type="text"
+              name="cardNumber"
+              value={cardDetails.cardNumber}
+              onChange={handleInputChange}
+              onKeyDown={(e) => {
+                if (e.key === '-') {
+                  e.preventDefault(); // Block minus sign
+                }
+              }}
+              placeholder="1234 5678 9012 3456"
+              required
+              maxLength={19}
+            />
             {validationErrors.cardNumber && (
               <p className="error-message">{validationErrors.cardNumber}</p>
             )}
