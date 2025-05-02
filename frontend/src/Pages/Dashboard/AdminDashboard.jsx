@@ -196,8 +196,6 @@ const AdminDashboard = () => {
           </LogoutButton>
         </AdminInfo>
       </DashboardHeader>
-
-      <DashboardTitle>Management Systems</DashboardTitle>
       
       <CardsRow>
         {systems.map((system, index) => (

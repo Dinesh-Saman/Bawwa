@@ -9,8 +9,31 @@ const NutrientCalculator = () => {
   const [isCalculating, setIsCalculating] = useState(false);
 
   const handlePetTypeChange = (e) => setPetType(e.target.value);
-  const handleAgeChange = (e) => setAge(e.target.value);
-  const handleWeightChange = (e) => setWeight(e.target.value);
+  
+  // Prevent minus sign and limit age to 100
+  const handleAgeChange = (e) => {
+    const value = e.target.value;
+    // Only allow digits and ensure value is between 0 and 100
+    if (value === '' || (/^\d*$/.test(value) && parseInt(value || 0) <= 100)) {
+      setAge(value);
+    }
+  };
+  
+  // Prevent minus sign and limit weight to 200
+  const handleWeightChange = (e) => {
+    const value = e.target.value;
+    // Only allow digits and decimals and ensure value is between 0 and 200
+    if (value === '' || (/^\d*\.?\d*$/.test(value) && parseFloat(value || 0) <= 200)) {
+      setWeight(value);
+    }
+  };
+  
+  // Prevent minus sign in number inputs
+  const preventMinusSign = (e) => {
+    if (e.key === '-' || e.key === 'e') {
+      e.preventDefault();
+    }
+  };
 
   const calculateNutrients = (type, age, weight) => {
     let protein, carbohydrates, fat, fiber;
@@ -66,28 +89,30 @@ const NutrientCalculator = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="age">Age (years)</label>
+            <label htmlFor="age">Age (years, max 100)</label>
             <input 
               type="number" 
               id="age"
               value={age}
               onChange={handleAgeChange}
+              onKeyDown={preventMinusSign}
               min="0"
-              max="30"
+              max="100"
               step="0.5"
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="weight">Weight (kg)</label>
+            <label htmlFor="weight">Weight (kg, max 200)</label>
             <input 
               type="number" 
               id="weight"
               value={weight}
               onChange={handleWeightChange}
+              onKeyDown={preventMinusSign}
               min="0.1"
-              max="100"
+              max="200"
               step="0.1"
               required
             />

@@ -1,15 +1,19 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Dog, Cat, Upload, X, Venus, Mars, ChevronLeft, ChevronRight } from "lucide-react";
 import { FaUser, FaPaw, FaEnvelope, FaPhone, FaCalendarAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom"; // Import useNavigate hook
+import { useNavigate } from "react-router-dom";
 import bgImage from "../../assets/1.png";
 import "./Register.css";
 
 const Register = ({ onClose }) => {
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const fileInputRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [touched, setTouched] = useState({
+    phone: false,
+    email: false
+  });
 
   const [formData, setFormData] = useState({
     user: { firstName: "", lastName: "", email: "", phone: "" },
@@ -18,17 +22,65 @@ const Register = ({ onClose }) => {
 
   const [errors, setErrors] = useState({});
 
+  // Real-time validation effects
+  useEffect(() => {
+    if (touched.phone) {
+      let phoneError = "";
+      if (!formData.user.phone.trim()) {
+        phoneError = "Phone number is required";
+      } else if (!/^\d{10}$/.test(formData.user.phone)) {
+        phoneError = "Phone number must be exactly 10 digits";
+      }
+      setErrors(prev => ({ ...prev, phone: phoneError }));
+    }
+  }, [formData.user.phone, touched.phone]);
+
+  useEffect(() => {
+    if (touched.email) {
+      let emailError = "";
+      if (!formData.user.email.trim()) {
+        emailError = "Email is required";
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.user.email)) {
+        emailError = "Please enter a valid email address";
+      }
+      setErrors(prev => ({ ...prev, email: emailError }));
+    }
+  }, [formData.user.email, touched.email]);
+
   const handleUserChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      user: { ...prev.user, [name]: value }
-    }));
+    
+    // Special handling for phone input
+    if (name === "phone") {
+      // Remove all non-digit characters and limit to 10 digits
+      const digitsOnly = value.replace(/\D/g, '').slice(0, 10);
+      setFormData(prev => ({
+        ...prev,
+        user: { ...prev.user, [name]: digitsOnly }
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        user: { ...prev.user, [name]: value }
+      }));
+    }
+
+    // Mark field as touched when changed
+    if (['phone', 'email'].includes(name) && !touched[name]) {
+      setTouched(prev => ({ ...prev, [name]: true }));
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    if (['phone', 'email'].includes(name)) {
+      setTouched(prev => ({ ...prev, [name]: true }));
+    }
   };
 
   const handlePetChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       pet: { ...prev.pet, [name]: value }
     }));
@@ -39,7 +91,7 @@ const Register = ({ onClose }) => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () =>
-        setFormData((prev) => ({
+        setFormData(prev => ({
           ...prev,
           pet: { ...prev.pet, image: reader.result }
         }));
@@ -48,7 +100,7 @@ const Register = ({ onClose }) => {
   };
 
   const removeImage = () => {
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       pet: { ...prev.pet, image: null }
     }));
@@ -59,8 +111,10 @@ const Register = ({ onClose }) => {
     const newErrors = {};
     if (!formData.user.firstName.trim()) newErrors.firstName = "First name is required";
     if (!formData.user.lastName.trim()) newErrors.lastName = "Last name is required";
-    if (!formData.user.email.trim() || !/\S+@\S+\.\S+/.test(formData.user.email)) newErrors.email = "Valid email is required";
+    if (!formData.user.email.trim()) newErrors.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.user.email)) newErrors.email = "Valid email is required";
     if (!formData.user.phone.trim()) newErrors.phone = "Phone number is required";
+    else if (!/^\d{10}$/.test(formData.user.phone)) newErrors.phone = "Phone number must be exactly 10 digits";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -83,9 +137,10 @@ const Register = ({ onClose }) => {
     }
   };
 
-  const prevStep = () => setStep((prev) => prev - 1);
+  const prevStep = () => setStep(prev => prev - 1);
 
   const handleSubmit = async () => {
+    setIsSubmitting(true);
     try {
       const response = await fetch("http://localhost:5000/api/user/register", {
         method: "POST",
@@ -110,23 +165,9 @@ const Register = ({ onClose }) => {
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("❌ Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
-  
-    // Reset form
-    setStep(1);
-    setFormData({
-      user: { firstName: "", lastName: "", email: "", phone: "" },
-      pet: {
-        name: "",
-        type: "",
-        breed: "",
-        age: "",
-        gender: "",
-        birthdate: "",
-        medicalConditions: "",
-        image: null,
-      },
-    });
   };
 
   const petTypes = [
@@ -194,8 +235,9 @@ const Register = ({ onClose }) => {
                     type="email" 
                     name="email" 
                     value={formData.user.email} 
-                    onChange={handleUserChange} 
-                    placeholder="Email" 
+                    onChange={handleUserChange}
+                    onBlur={handleBlur}
+                    placeholder="example@domain.com" 
                     className={errors.email ? "error" : ""}
                   />
                   {errors.email && <span className="error-message">{errors.email}</span>}
@@ -205,11 +247,21 @@ const Register = ({ onClose }) => {
                     type="tel" 
                     name="phone" 
                     value={formData.user.phone} 
-                    onChange={handleUserChange} 
-                    placeholder="Phone Number" 
+                    onChange={handleUserChange}
+                    onBlur={handleBlur}
+                    placeholder="10-digit phone number" 
                     className={errors.phone ? "error" : ""}
+                    maxLength={10}
+                    onKeyDown={(e) => {
+                      if (!/\d|Backspace|Delete|ArrowLeft|ArrowRight|Tab/.test(e.key)) {
+                        e.preventDefault();
+                      }
+                    }}
                   />
                   {errors.phone && <span className="error-message">{errors.phone}</span>}
+                  {formData.user.phone && formData.user.phone.length < 10 && !errors.phone && (
+                    <span className="error-message">Phone number must be 10 digits</span>
+                  )}
                 </div>
               </div>
               <div className="form-actions">
@@ -249,15 +301,17 @@ const Register = ({ onClose }) => {
               </div>
               
               <div className="input-row">
-                <div className="input-group">
-                  <input 
-                    type="date" 
-                    name="birthdate" 
-                    value={formData.pet.birthdate} 
-                    onChange={handlePetChange} 
-                    className="date-input"
-                  />
-                </div>
+              <div className="input-group">
+                <h5>Birth Date</h5>
+                <input 
+                  type="date" 
+                  name="birthdate" 
+                  value={formData.pet.birthdate} 
+                  onChange={handlePetChange} 
+                  className="date-input"
+                  max={new Date().toISOString().split('T')[0]} // This prevents future dates
+                />
+              </div>
                 <div className="input-group">
                   <input 
                     type="text" 
@@ -266,6 +320,7 @@ const Register = ({ onClose }) => {
                     onChange={handlePetChange} 
                     placeholder="Age (if birthdate unknown)" 
                     className={errors.petAge ? "error" : ""}
+                    style={{marginTop:'22px'}}
                   />
                   {errors.petAge && <span className="error-message">{errors.petAge}</span>}
                 </div>
@@ -277,7 +332,7 @@ const Register = ({ onClose }) => {
                   <button 
                     key={value} 
                     type="button" 
-                    onClick={() => setFormData((prev) => ({ ...prev, pet: { ...prev.pet, type: value } }))} 
+                    onClick={() => setFormData(prev => ({ ...prev, pet: { ...prev.pet, type: value } }))} 
                     style={{
                       display: "flex",
                       alignItems: "center",
@@ -309,7 +364,7 @@ const Register = ({ onClose }) => {
                   <button 
                     key={value} 
                     type="button" 
-                    onClick={() => setFormData((prev) => ({ ...prev, pet: { ...prev.pet, gender: value } }))} 
+                    onClick={() => setFormData(prev => ({ ...prev, pet: { ...prev.pet, gender: value } }))} 
                     style={{
                       display: "flex",
                       alignItems: "center",

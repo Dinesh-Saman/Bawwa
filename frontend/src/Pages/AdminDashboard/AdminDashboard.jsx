@@ -229,13 +229,42 @@ const AdminDashboard = () => {
               <div className="form-group">
                 <label>Price (LKR):</label>
                 <input
-                  type="number"
-                  name="price"
-                  value={formData.price}
-                  onChange={handleInputChange}
-                  step="0.01"
-                  required
-                />
+                    type="number"
+                    name="price"
+                    value={formData.price}
+                    onChange={(e) => {
+                      const rawValue = e.target.value;
+
+                      // If input is empty, allow clearing
+                      if (rawValue === "") {
+                        handleInputChange(e); // Updates state with ""
+                        return;
+                      }
+
+                      // If input is just "-", block it (reset to last valid value)
+                      if (rawValue === "-") {
+                        e.preventDefault(); // Optional (not always needed)
+                        return;
+                      }
+
+                      const numericValue = parseFloat(rawValue);
+
+                      // Only update if valid number and within range
+                      if (!isNaN(numericValue) && numericValue >= 0 && numericValue <= 1000000) {
+                        handleInputChange(e);
+                      }
+                    }}
+                    onKeyDown={(e) => {
+                      // Block the '-' key from being pressed at all
+                      if (e.key === "-") {
+                        e.preventDefault();
+                      }
+                    }}
+                    step="0.01"
+                    min="0"
+                    max="1000000"
+                    required
+                  />
               </div>
               <div className="form-group">
                 <label>3D Model (.glb):</label>

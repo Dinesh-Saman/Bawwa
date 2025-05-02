@@ -87,11 +87,13 @@ function App() {
                     <Route path="/services/pet-3d" element={<PetImageTo3D />} />
                     <Route path="/shop/accessories" element={<PetAccessories />} />
                     <Route path="/admin" element={<UserAdmin />} />
-                    <Route path="/adminPanel" element={<AdminPanel />} />
+                    
                     <Route path="/AdminDashboard" element={<AdminDashboard />} />
                   </Routes>
                 </MainLayout>
+                
               } />
+              <Route path="/adminPanel" element={<AdminPanel />} />
             </Routes>
           </Router>
         </CartProvider>

@@ -22,6 +22,13 @@
   border-spacing: 0 10px;
 }
 
+/* Make table header sticky */
+.admin-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
 .admin-table th {
   background-color: #34495e;
   color: white;
@@ -152,4 +159,31 @@
     font-size: 0.9rem;
     padding: 10px;
   }
+}
+
+.error-input {
+  border: 1px solid #ff4444 !important;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }

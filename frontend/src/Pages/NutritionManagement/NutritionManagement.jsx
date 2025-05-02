@@ -24,6 +24,17 @@ const NutritionManagement = () => {
 
   const API_BASE_URL = 'http://localhost:5000/api/nutrition';
 
+  // Check if all form fields are filled
+  const isFormComplete = () => {
+    return (
+      formData.petId.trim() !== '' &&
+      formData.foodName.trim() !== '' &&
+      formData.portionSize.trim() !== '' &&
+      formData.feedingFrequency.trim() !== '' &&
+      formData.calories.trim() !== ''
+    );
+  };
+
   useEffect(() => {
     fetchNutritionData();
   }, []);
@@ -216,6 +227,24 @@ const NutritionManagement = () => {
     }
   };
 
+  // Handle portion size input with restrictions
+  const handlePortionSizeChange = (e) => {
+    const value = e.target.value;
+    // Only allow positive numbers up to 1000
+    if (value === '' || (parseFloat(value) >= 0 && parseFloat(value) <= 1000 && !value.includes('-'))) {
+      setFormData({ ...formData, portionSize: value });
+    }
+  };
+
+  // Handle calories input with restrictions
+  const handleCaloriesChange = (e) => {
+    const value = e.target.value;
+    // Only allow positive numbers up to 100000
+    if (value === '' || (parseFloat(value) >= 0 && parseFloat(value) <= 100000 && !value.includes('-'))) {
+      setFormData({ ...formData, calories: value });
+    }
+  };
+
   return (
     <div className="nutrition-management">
       <br />
@@ -258,15 +287,23 @@ const NutritionManagement = () => {
 
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="portionSize">Portion Size</label>
+                <label htmlFor="portionSize">Portion Size (max 1000)</label>
                 <input
                   id="portionSize"
                   type="number"
-                  placeholder="Enter portion size"
+                  placeholder="Enter portion size (0-1000)"
                   value={formData.portionSize}
-                  onChange={(e) => setFormData({ ...formData, portionSize: e.target.value })}
+                  onChange={handlePortionSizeChange}
                   required
-                  min="1"
+                  min="0"
+                  max="1000"
+                  step="1"
+                  onKeyPress={(e) => {
+                    // Prevent minus sign, plus sign, and decimal point
+                    if (e.key === '-' || e.key === '+' || e.key === '.') {
+                      e.preventDefault();
+                    }
+                  }}
                 />
               </div>
 
@@ -277,6 +314,7 @@ const NutritionManagement = () => {
                   value={formData.feedingFrequency}
                   onChange={(e) => setFormData({ ...formData, feedingFrequency: e.target.value })}
                   required
+                  style={{marginTop:'24px'}}
                 >
                   <option value="">Select Frequency</option>
                   <option value="daily">Daily</option>
@@ -287,20 +325,38 @@ const NutritionManagement = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="calories">Calories</label>
+              <label htmlFor="calories">Calories (max 100,000)</label>
               <input
                 id="calories"
                 type="number"
-                placeholder="Enter calories"
+                placeholder="Enter calories (0-100,000)"
                 value={formData.calories}
-                onChange={(e) => setFormData({ ...formData, calories: e.target.value })}
+                onChange={handleCaloriesChange}
                 required
-                min="1"
+                min="0"
+                max="100000"
+                step="1"
+                onKeyPress={(e) => {
+                  // Prevent minus sign, plus sign, and decimal point
+                  if (e.key === '-' || e.key === '+' || e.key === '.') {
+                    e.preventDefault();
+                  }
+                }}
+                onPaste={(e) => {
+                  const pasteData = e.clipboardData.getData('text');
+                  if (!/^\d*$/.test(pasteData)) {
+                    e.preventDefault();
+                  }
+                }}
               />
             </div>
 
             <div className="form-actions">
-              <button type="submit" className="btn btn-primary" disabled={loading}>
+              <button 
+                type="submit" 
+                className="btn btn-primary" 
+                disabled={loading || !isFormComplete()}
+              >
                 {editingId ? 'Update Record' : 'Add Record'}
               </button>
               {editingId && (

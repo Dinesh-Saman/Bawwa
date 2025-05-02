@@ -30,7 +30,6 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 30px;
-  margin-top: 80px;
 }
 
 @media (min-width: 992px) {

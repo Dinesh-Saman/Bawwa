@@ -52,8 +52,12 @@ const LostPet = () => {
     if (!formData.location.trim()) errors.location = "Location is required";
     if (!formData.contact.trim()) {
       errors.contact = "Contact information is required";
-    } else if (!/^\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/.test(formData.contact)) {
-      errors.contact = "Enter a valid phone number (e.g., 071-456-7890)";
+    } else {
+      // Remove any non-digit characters for validation
+      const digitsOnly = formData.contact.replace(/\D/g, '');
+      if (digitsOnly.length !== 10) {
+        errors.contact = "Contact number must be exactly 10 digits";
+      }
     }
     if (!formData.description.trim()) errors.description = "Description is required";
 
@@ -240,10 +244,18 @@ const LostPet = () => {
               type="tel" 
               name="contact"
               value={formData.contact}
-              onChange={handleChange}
-              placeholder="Your phone number"
-              maxLength={10}  
-              pattern="[0-9]{10}" 
+              onChange={(e) => {
+                const digitsOnly = e.target.value.replace(/\D/g, '');
+                if (digitsOnly.length <= 10) {
+                  handleChange({
+                    target: {
+                      name: 'contact',
+                      value: e.target.value
+                    }
+                  });
+                }
+              }}
+              placeholder="Your phone number (10 digits)"
               onKeyPress={(e) => {
                 if (!/[0-9]/.test(e.key)) {
                   e.preventDefault();

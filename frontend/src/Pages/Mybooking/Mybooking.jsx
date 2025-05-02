@@ -9,12 +9,15 @@ const Mybooking = () => {
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [editing, setEditing] = useState(null);
   const [editData, setEditData] = useState({});
+  const [validationErrors, setValidationErrors] = useState({
+    email: '',
+    contact: ''
+  });
   const [isLoading, setIsLoading] = useState(true);
   const [userEmail, setUserEmail] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    // Get user email and admin status from localStorage when component mounts
     const email = localStorage.getItem('userEmail');
     const adminStatus = localStorage.getItem('isAdmin') === 'true';
     if (email) {
@@ -23,18 +26,24 @@ const Mybooking = () => {
     setIsAdmin(adminStatus);
   }, []);
 
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const validateContact = (contact) => {
+    return /^\d{10}$/.test(contact);
+  };
+
   const fetchAppointments = async () => {
     try {
       setIsLoading(true);
       const response = await axios.get("http://localhost:5000/api/appointments");
       setAppointments(response.data);
       
-      // Filter appointments based on admin status
       if (isAdmin) {
-        // Show all appointments for admin
         setFilteredAppointments(response.data);
       } else if (userEmail) {
-        // Show only user's appointments for regular users
         const filtered = response.data.filter(app => app.email === userEmail);
         setFilteredAppointments(filtered);
       } else {
@@ -49,7 +58,7 @@ const Mybooking = () => {
 
   useEffect(() => {
     fetchAppointments();
-  }, [userEmail, isAdmin]); // Refetch when userEmail or isAdmin changes
+  }, [userEmail, isAdmin]);
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this appointment?")) {
@@ -65,10 +74,28 @@ const Mybooking = () => {
   const handleEdit = (appointment) => {
     setEditing(appointment._id);
     setEditData(appointment);
+    setValidationErrors({
+      email: validateEmail(appointment.email) ? '' : 'Please enter a valid email address',
+      contact: validateContact(appointment.contact) ? '' : 'Contact must be 10 digits'
+    });
   };
 
   const handleChange = (e) => {
-    setEditData({ ...editData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    const updatedData = { ...editData, [name]: value };
+    setEditData(updatedData);
+
+    const errors = { ...validationErrors };
+    
+    if (name === 'email') {
+      errors.email = validateEmail(value) ? '' : 'Please enter a valid email address';
+    }
+    
+    if (name === 'contact') {
+      errors.contact = validateContact(value) ? '' : 'Contact must be 10 digits';
+    }
+    
+    setValidationErrors(errors);
   };
 
   const handleUpdate = async () => {
@@ -106,6 +133,19 @@ const Mybooking = () => {
     doc.text("Contact us at: support@bawwa.lk", 105, 150, null, null, 'center');
     
     doc.save(`${appointment.name}_appointment.pdf`);
+  };
+
+  const isSaveDisabled = () => {
+    return (
+      !!validationErrors.email || 
+      !!validationErrors.contact ||
+      !editData.name ||
+      !editData.email ||
+      !editData.contact ||
+      !editData.service ||
+      !editData.date ||
+      !editData.time
+    );
   };
 
   return (
@@ -156,6 +196,7 @@ const Mybooking = () => {
                             value={editData.name} 
                             onChange={handleChange} 
                             placeholder="Full Name"
+                            required
                           />
                         </td>
                         <td>
@@ -165,22 +206,40 @@ const Mybooking = () => {
                             value={editData.email} 
                             onChange={handleChange} 
                             placeholder="Email"
+                            className={validationErrors.email ? 'error-input' : ''}
+                            required
                           />
+                          {validationErrors.email && (
+                            <div className="error-message">{validationErrors.email}</div>
+                          )}
                         </td>
                         <td>
-                          <input 
+                        <input 
                             type="tel" 
                             name="contact" 
                             value={editData.contact} 
                             onChange={handleChange} 
                             placeholder="Contact"
+                            className={validationErrors.contact ? 'error-input' : ''}
+                            required
+                            maxLength={10}
+                            onKeyPress={(e) => {
+                              // Only allow numbers
+                              if (!/[0-9]/.test(e.key)) {
+                                e.preventDefault();
+                              }
+                            }}
                           />
+                          {validationErrors.contact && (
+                            <div className="error-message">{validationErrors.contact}</div>
+                          )}
                         </td>
                         <td>
                           <select 
                             name="service" 
                             value={editData.service} 
                             onChange={handleChange}
+                            required
                           >
                             <option value="Grooming">Grooming</option>
                             <option value="Boarding">Boarding</option>
@@ -194,6 +253,7 @@ const Mybooking = () => {
                             name="date" 
                             value={editData.date} 
                             onChange={handleChange} 
+                            required
                           />
                         </td>
                         <td>
@@ -202,10 +262,15 @@ const Mybooking = () => {
                             name="time" 
                             value={editData.time} 
                             onChange={handleChange} 
+                            required
                           />
                         </td>
                         <td className="actions-cell">
-                          <button className="save-btn-appointment" onClick={handleUpdate}>
+                          <button 
+                            className="save-btn-appointment" 
+                            onClick={handleUpdate}
+                            disabled={isSaveDisabled()}
+                          >
                             Save
                           </button>
                           <button className="cancel-btn-appointment" onClick={() => setEditing(null)}>
