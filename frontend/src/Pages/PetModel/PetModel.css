@@ -46,7 +46,6 @@ header h1:hover {
   gap: 60px; /* Generous gap for professional spacing */
   padding: 60px 30px;
   max-width: 1500px; /* Wider for modern screens */
-  margin: 100px auto 60px; /* Space for header/footer */
   flex-wrap: wrap;
   flex-grow: 1;
   overflow-y: auto;
