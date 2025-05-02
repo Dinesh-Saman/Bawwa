@@ -1,19 +1,46 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
+import Footer from '../../Components/footer/footer';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  // Admin credentials
+  const ADMIN_EMAIL = 'bawwa@gmail.com';
+  const ADMIN_PASSWORD = 'bawwa';
+  const DEFAULT_PASSWORD = 'defaultPassword123';
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (email && password) {
-      navigate('/adminPanel');
-    } else {
-      alert('Please enter both email and password');
+    setError('');
+
+    if (!email || !password) {
+      setError('Please enter both email and password');
+      return;
     }
+
+    // Check for admin login
+    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+      localStorage.setItem('userEmail', email);
+      localStorage.setItem('isAdmin', 'true');
+      navigate('/adminPanel');
+      return;
+    }
+
+    // Check for regular user login
+    if (password === DEFAULT_PASSWORD) {
+      localStorage.setItem('userEmail', email);
+      localStorage.setItem('isAdmin', 'false');
+      navigate('/');
+      return;
+    }
+
+    // Invalid credentials
+    setError('Invalid email or password');
   };
 
   const handleCreateAccount = () => {
@@ -22,12 +49,15 @@ const Login = () => {
 
   return (
     <div className="login-page">
+      <div className="login-background"></div>
       <div className="login-container">
         <div className="login-card">
           <div className="login-header">
             <h2>Welcome Back</h2>
             <p>Please enter your credentials to login</p>
           </div>
+          
+          {error && <div className="error-message">{error}</div>}
           
           <form onSubmit={handleLogin} className="login-form">
             <div className="form-group">

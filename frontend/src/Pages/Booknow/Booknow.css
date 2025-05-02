@@ -32,23 +32,50 @@
   border: 2px solid #ff9a42;
 }
 
+.booknow-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
 .booknow-title {
   color: #333;
   font-size: 2rem;
-  margin-bottom: 25px;
-  text-align: center;
   position: relative;
+  flex-grow: 1;
 }
 
 .booknow-title::after {
   content: '';
   position: absolute;
   bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   width: 80px;
   height: 3px;
   background: linear-gradient(to right, #ff7a00, #ff9a42);
+}
+
+.view-appointments-button {
+  background-color: #6a0dad;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.view-appointments-button:hover {
+  background-color: #5a0b9d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 /* Form Layout */
@@ -197,6 +224,16 @@ select {
   .booknow-title {
     font-size: 1.7rem;
   }
+  
+  .booknow-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .booknow-title::after {
+    left: 0;
+    transform: none;
+  }
 }
 
 @media (max-width: 480px) {
@@ -215,5 +252,10 @@ select {
   .booknow-button {
     padding: 12px 20px;
     width: 100%;
+  }
+  
+  .view-appointments-button {
+    width: 100%;
+    padding: 10px;
   }
 }

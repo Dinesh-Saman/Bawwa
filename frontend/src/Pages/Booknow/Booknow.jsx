@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./Booknow.css";
 
 const Booknow = () => {
@@ -17,6 +18,14 @@ const Booknow = () => {
   const [isContactValid, setIsContactValid] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user is admin when component mounts
+    const adminStatus = localStorage.getItem('isAdmin') === 'true';
+    setIsAdmin(adminStatus);
+  }, []);
 
   const validate = () => {
     let newErrors = {};
@@ -80,10 +89,24 @@ const Booknow = () => {
     }
   };
 
+  const handleViewAppointments = () => {
+    navigate('/mybookings');
+  };
+
   return (
     <div className="booknow-page">
       <div className="booknow-container">
-        <h2 className="booknow-title">Book Your Appointment</h2>
+        <div className="booknow-header">
+          <h2 className="booknow-title">Book Your Appointment</h2>
+          {isAdmin && (
+            <button 
+              className="view-appointments-button"
+              onClick={handleViewAppointments}
+            >
+              View All Appointments
+            </button>
+          )}
+        </div>
         
         {isSuccess ? (
           <div className="success-message">

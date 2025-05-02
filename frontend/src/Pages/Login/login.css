@@ -1,9 +1,48 @@
-/* Base Styles */
+/* Replace the gradient with background image */
 .login-page {
-  display: flex;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background-image: url('https://img.freepik.com/premium-photo/welsh-corgi-cardigan-cute-fluffy-dog-puppies-arms-woman-closeup-portrait-puppies-funny-animals_538159-3152.jpg?w=996');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+/* Optional: Add overlay for better text readability */
+.login-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3); /* Dark overlay */
+  z-index: 0;
+}
+
+/* Make sure content stays above overlay */
+.login-container,
+.login-card {
+  position: relative;
+  z-index: 1;
+}
+
+/* Rest of your existing styles remain the same */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 2rem;
+}
+
+.login-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 520px;
+  padding: 2.5rem;
 }
 
 .login-container {
@@ -12,7 +51,6 @@
   align-items: center;
   width: 100%;
   padding: 2rem;
-  margin-top: 100px;
 }
 
 .login-card {
@@ -23,6 +61,7 @@
   max-width: 420px;
   padding: 2.5rem;
   animation: fadeIn 0.5s ease-in-out;
+  margin-top: 100px;
 }
 
 @keyframes fadeIn {

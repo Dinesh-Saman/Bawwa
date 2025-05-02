@@ -83,12 +83,14 @@ nav a {
 button {
     background-color: #F97316;
     color: white;
-    padding: 12px 18px;
+    padding: 10px 16px;
     border: none;
     border-radius: 100px;
     cursor: pointer;
     transition: background 0.3s;
     font-size: 1rem;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 
 button:hover {

@@ -163,13 +163,10 @@ const AdminDashboard = () => {
   return (
     <div className="admin-dashboard">
       <header className="dashboard-header">
-        <h1 style={{marginLeft:'50px', color:'white'}}>Admin Dashboard</h1>
+        <h1 style={{marginLeft:'10px', color:'white'}}>Admin Dashboard</h1>
         <div className="header-controls">
           <button className="add-btn" onClick={() => setShowForm(true)}>
             Add New Accessory
-          </button>
-          <button className="refresh-btn" onClick={fetchSalesData}>
-            Refresh Sales
           </button>
           <div className="filter-section">
             <select
@@ -177,7 +174,7 @@ const AdminDashboard = () => {
               value={filter.petType}
               onChange={handleFilterChange}
               className="filter-select"
-              style={{width:'300%'}}
+              style={{width:'700%'}}
             >
               <option value="">All Pet Types</option>
               <option value="dog">Dog</option>
@@ -191,7 +188,7 @@ const AdminDashboard = () => {
               onChange={handleFilterChange}
               placeholder="Search by name or description"
               className="filter-input"
-              style={{width:'500%'}}
+              style={{width:'1000%'}}
             />
           </div>
         </div>

@@ -27,15 +27,7 @@ const Navbar = () => {
           onMouseEnter={() => setIsShopOpen(true)}
           onMouseLeave={() => setIsShopOpen(false)}
         >
-          <Link to="/">SHOP</Link>
-          {isShopOpen && (
-            <div className="dropdown-menu">
-              <Link to="/PetDietPlans">Pet Foods</Link>
-              <Link to="/shop/accessories">Accessories</Link>
-              <Link to="/shop/toys">Toys</Link>
-              <Link to="/shop/health">Health & Wellness</Link>
-            </div>
-          )}
+          <Link to="/shop/accessories">SHOP</Link>
         </div>
 
         <Link to="/aboutus" className="nav-item">ABOUT US</Link>
@@ -46,14 +38,6 @@ const Navbar = () => {
           onMouseEnter={() => setIsBlogOpen(true)}
           onMouseLeave={() => setIsBlogOpen(false)}
         >
-          <Link to="/">BLOG</Link>
-          {isBlogOpen && (
-            <div className="dropdown-menu">
-              <Link to="/nutrientplans">Nutrition Plans</Link>
-              <Link to="/nutrientcalculator">Nutrient Calculator</Link>
-              <Link to="/petdietplans">Pet Diet Plans</Link>
-            </div>
-          )}
         </div>
       </nav>
       <div className="button-container">

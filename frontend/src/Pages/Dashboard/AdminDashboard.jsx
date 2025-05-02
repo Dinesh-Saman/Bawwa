@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ const DashboardContainer = styled.div`
 `;
 
 const DashboardHeader = styled.header`
-  background-color: #6a0dad;
+  background-color: blue;
   color: white;
   padding: 1rem 2rem;
   display: flex;
@@ -19,7 +19,7 @@ const DashboardHeader = styled.header`
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 `;
 
-const MenuButton = styled.button`
+const BackButton = styled.button`
   background: none;
   border: none;
   color: white;
@@ -29,7 +29,7 @@ const MenuButton = styled.button`
   align-items: center;
 `;
 
-const MenuIcon = styled.svg`
+const BackIcon = styled.svg`
   width: 24px;
   height: 24px;
 `;
@@ -39,6 +39,7 @@ const HeaderTitle = styled.h1`
   margin: 0;
   flex-grow: 1;
   text-align: center;
+  color: white;
 `;
 
 const AdminInfo = styled.div`
@@ -53,7 +54,7 @@ const AdminName = styled.span`
 
 const LogoutButton = styled.button`
   background-color: white;
-  color: #6a0dad;
+  color: blue;
   border: none;
   border-radius: 4px;
   padding: 0.5rem 1rem;
@@ -83,6 +84,7 @@ const CardsRow = styled.div`
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
+  margin-top: 50px;
 `;
 
 const Card = styled.div`
@@ -133,11 +135,6 @@ const CardTitle = styled.h3`
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
 
   const systems = [
     {
@@ -162,11 +159,22 @@ const AdminDashboard = () => {
     },
   ];
 
+  const handleLogout = () => {
+    // Clear admin status and navigate to home
+    localStorage.setItem('isAdmin', 'false');
+    localStorage.removeItem('userEmail'); // Optional: clear email too
+    navigate('/');
+  };
+
+  const handleBack = () => {
+    navigate('/');
+  };
+
   return (
     <DashboardContainer>
-      <DashboardHeader style={{backgroundColor:'blue'}}>
-        <MenuButton onClick={toggleSidebar}>
-          <MenuIcon
+      <DashboardHeader>
+        <BackButton onClick={handleBack}>
+          <BackIcon
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -176,14 +184,14 @@ const AdminDashboard = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
-              d="M4 6h16M4 12h16m-7 6h7"
-            ></path>
-          </MenuIcon>
-        </MenuButton>
-        <HeaderTitle style={{color:'white'}}>Admin Dashboard</HeaderTitle>
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            />
+          </BackIcon>
+        </BackButton>
+        <HeaderTitle>Admin Dashboard</HeaderTitle>
         <AdminInfo>
           <AdminName>Admin User</AdminName>
-          <LogoutButton onClick={() => navigate('/')}>
+          <LogoutButton onClick={handleLogout}>  
             Logout
           </LogoutButton>
         </AdminInfo>
@@ -191,7 +199,7 @@ const AdminDashboard = () => {
 
       <DashboardTitle>Management Systems</DashboardTitle>
       
-      <CardsRow style={{marginTop:'50px'}}>
+      <CardsRow>
         {systems.map((system, index) => (
           <Card key={index} onClick={() => navigate(system.path)}>
             <CardImage>

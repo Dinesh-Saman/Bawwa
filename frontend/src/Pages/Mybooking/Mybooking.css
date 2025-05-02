@@ -245,7 +245,7 @@ input:focus, select:focus {
 }
 
 /* Save/Cancel Buttons */
-.save-btn, .cancel-btn {
+.save-btn-appointment, .cancel-btn-appointment {
   padding: 8px 15px;
   border-radius: 6px;
   font-size: 0.85rem;

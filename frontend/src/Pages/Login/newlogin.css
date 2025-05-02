@@ -1,0 +1,39 @@
+
+.login-background-user {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.7);
+    z-index: 0;
+    margin-top: 100px;
+  }
+
+  .login-container-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+    margin-top: 100px;
+  }
+
+  .login-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px; /* Increased width */
+    padding: 3rem; /* Increased padding */
+    animation: fadeIn 0.5s ease-in-out;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
